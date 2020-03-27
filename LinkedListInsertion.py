@@ -23,7 +23,8 @@ class LinkedList(object):
 
 
 if __name__== '__main__':
-	list  = LinkedList()
+	list  = LinkedList() # creating object
+
 
 	list.push(2)
 	list.push(4)
