@@ -8,6 +8,7 @@ class LinkedList(object):
 	"""docstring for LinkedList"""
 	def __init__(self):
 		self.head = None
+		self.last = None
 
 # ------------Inserting in linked list----------------------------
 	# Adding a node at the start
@@ -66,6 +67,14 @@ class LinkedList(object):
 		temp = None			
 
 #-----------------------------------------------------
+# Returning the number of elements in the list
+	def getCount(self):
+		temp = self.head
+		count = 0
+		while (temp):
+			count+=1
+			temp = temp.next
+		return count
 
 
 	def printList(self):
@@ -73,8 +82,28 @@ class LinkedList(object):
 		while (temp):
 			print(temp.data)
 			temp = temp.next
-
-
+#----------------------------------------------------------
+# counting how many time a integer has occured in a linked list
+	def getCountOfInteger(self,searchInt):
+		current = self.head
+		count = 0
+		while current is not None:
+			if current.data == searchInt:
+				count+=1
+			current = current.next
+		return count
+#-----------------------------------------------------------
+# Detecting loop in a linked list
+	'''def detectLoop(self):
+		temp = self.head
+		s = set()
+		while temp:
+			if (temp in s):
+				return True
+			s.add(temp)
+			temp = temp.next
+		return False'''
+#---------------------------------------------------------------
 
 if __name__== '__main__':
 	list  = LinkedList() # creating object
@@ -102,17 +131,22 @@ while choice is not 6:
 list.push(2)
 list.push(4)
 list.push(9)
-list.insertAfter(list.head.next,5)
-list.insertAtEnd(90)
-list.push(6)
-list.insertAfter(list.head.next, 10)
-list.insertAfter(list.head.next, 11)
-list.insertAfter(list.head.next, 99)
-list.deleteNode(11)
 
+#list.insertAfter(list.head.next,5)
+#list.insertAtEnd(90)
+#list.push(6)
+#list.push(6)
+#list.insertAfter(list.head.next, 10)
+#list.insertAfter(list.head.next, 11)
+#list.insertAfter(list.head.next, 99)
+#list.deleteNode(11)
+print("The number of times integer is repeated is ",list.getCountOfInteger(6))
 
 print("created linked list is: ")
 list.printList()
+print("Count of linked list is: ",list.getCount())
+
+#print("Total number of elements in the list is: "+list.count())
 
 
 		
