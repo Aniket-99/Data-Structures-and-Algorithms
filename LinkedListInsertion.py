@@ -104,7 +104,35 @@ class LinkedList(object):
 			temp = temp.next
 		return False'''
 #---------------------------------------------------------------
+# Removing duplicates from sorted link list--------
+	def removeDuplicates(self):
+		temp = self.head
+		if temp is None:
+			return 
+		while temp.next is not None:
+			if temp.data == temp.next.data:
+				pointer = temp.next.next
+				temp.next = None  # delteing the item
+				temp.next = pointer	# referencing to the next of the deleted node
+			else:
+				temp = temp.next
+		return self.head
+#-----------------------------------------------------------
 
+''' Removing duplicates from unsorted linked list
+	def removeDuplicatedFromUnsorted(self,list):
+		temp = self.head
+		if temp is None:
+			return
+		while temp:
+			data = temp.data
+			current = temp.next
+			while current:
+				if current.data == data:
+					list.deleteNode(current)
+				current = current.next
+			temp = temp.next
+'''
 if __name__== '__main__':
 	list  = LinkedList() # creating object
 
@@ -130,7 +158,13 @@ while choice is not 6:
 
 list.push(2)
 list.push(4)
-list.push(9)
+list.push(4)
+list.push(6)
+print("created Linked List is ")
+list.printList()
+list.removeDuplicates()
+print("Linked list after deleting duplicates is")
+list.printList()
 
 #list.insertAfter(list.head.next,5)
 #list.insertAtEnd(90)
