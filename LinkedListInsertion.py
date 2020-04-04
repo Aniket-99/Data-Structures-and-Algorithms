@@ -119,6 +119,21 @@ class LinkedList(object):
 		return self.head
 #-----------------------------------------------------------
 
+# reversing the link list......
+
+	def reverseLinkedList(self):
+		prev = None
+		current = self.head
+		if current is None:
+			return                       
+		while current is not None:
+			next = current.next
+			current.next = prev
+			prev = current
+			current = next
+		self.head = prev
+
+
 ''' Removing duplicates from unsorted linked list
 	def removeDuplicatedFromUnsorted(self,list):
 		temp = self.head
@@ -165,7 +180,9 @@ list.printList()
 list.removeDuplicates()
 print("Linked list after deleting duplicates is")
 list.printList()
-
+list.reverseLinkedList()
+print("List after reversing is ")
+list.printList()
 #list.insertAfter(list.head.next,5)
 #list.insertAtEnd(90)
 #list.push(6)
