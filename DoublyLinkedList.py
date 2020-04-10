@@ -24,9 +24,7 @@ class DoublyLinkedList(object):
 	def deleteNode(self, dele):
 		if self.head is None or dele is None: # If linked list is empty
 			return
-
-		
-
+    
 		if self.head == dele:	# If the node to be deleted is first node
 			self.head = dele.next
 
