@@ -1,5 +1,4 @@
 from collections import deque
-
 class Node:
 	def __init__(self, value):
 		self.info = value
@@ -44,13 +43,66 @@ class BinaryTree:
 			return hR + 1
 
 
+	def preorder(self):
+		self._preorder(self.root)
+		print()
+
+	def _preorder(self, p):
+		if p is None:
+			return
+		print(p.info," ",end="")
+		self._preorder(p.lChild)
+		self._preorder(p.RChild)
+
+	def inorder(self):
+		self._inorder(self.root)
+		print()
+
+	def _inorder(self, p):
+		if p is None:
+			return
+		self._inorder(p.lChild)
+		print(p.info," ",end="")
+		self._inorder(p.RChild)
+
+	def postorder(self):
+		self._postorder(self.root)
+		print()
+
+	def _postorder(self, p):
+		if p is None:
+			return
+		self._postorder(p.lChild)
+		self._preorder(p.RChild)
+		print(p.info," ",end="")
+
+	def levelorder(self):
+		if self.root is None:
+			print("Tree is empty")
+			return
+
+		qu = deque()
+		qu.append(self.root)
+
+		while len(qu)!=0:
+			p = qu.popleft()
+			print(p.info," ",end="")
+			if p.lChild is not None:
+				qu.append(p.lChild)
+			if p.RChild is not None:
+				qu.append(p.RChild)
+			#print(self.root.info)
+			#print(self.root.lChild.info)
+			#print(self.root.RChild.info)
+
+
 	def createTree(self):
 		self.root = Node('P')
 		self.root.lChild = Node('Q')
 		self.root.RChild = Node('R')
 		self.root.lChild.lChild = Node('A')
 		self.root.lChild.RChild = Node('B')
-		self.root.RChild.lChild = Node('x')
+		self.root.RChild.lChild = Node('X')
 
 
 
@@ -63,3 +115,14 @@ print()
 height = bt.heightOfTree()
 print("The height of the tree is: ",height)
 
+print("The preorder traversal of the tree is: ")
+bt.preorder()
+
+print("The Inorder traversal of the tree is: ")
+bt.inorder()
+
+print("The post order traversal of the tree is: ")
+bt.postorder()
+
+print("The level order traversal of the tree is: ")
+bt.levelorder()
