@@ -14,6 +14,7 @@ class BinarySearchTree:
 	def isEmpty(self):
 		return self.root == None
 
+# display need to be improved
 	def display(self):
 		self._display(self.root,0)
 		print()
@@ -189,6 +190,79 @@ class BinarySearchTree:
 			print(x, " is already present in the tree")
 		return p
 
+	def deleteIteratively(self, x):
+		p = self.root
+		par = None
+
+		while p is not None:
+			if x == p.info:
+				break
+			
+			elif x < p.info:
+				p = p.lChild
+			else:
+				p = p.Rchild
+
+		if p == None:
+			print(x, " node not found")
+			return
+
+
+		# case c : if node has 2 children
+
+		if p.lChild is not None and p.Rchild is not None:
+			ps = p
+			s = p.Rchild
+
+			while s.lChild is not None:
+				ps = s
+				s = s.lChild
+			p.info = s.info
+			p = s
+			par = ps 
+
+		# case A: node has no child and case B: node has 1 child
+
+		if p.lChild is not None:
+			ch = p.lChild
+		else:
+			ch = p.Rchild
+
+		if par == None:	# node to be deleted is root node
+			self.root = ch
+		elif p == par.lChild:	# node to be deleted is left child of its parent
+			par.lChild = ch
+		elif p == par.Rchild:	# node to be deleted is right child of its parent
+			par.Rchild = ch
+
+	def deleteRecursively(self, x):
+		self.root = self._deleteRecursively(self.root, x)
+
+
+	def _deleteRecursively(self, p, x):
+		if p is None:
+			print(x, " node not found")
+			return
+
+		if x < p.info:
+			p.lChild = self._deleteRecursively(p.lChild, x)
+		elif x > p.info:
+			p.Rchild = self._deleteRecursively(p.Rchild, x)
+		else:
+			if p.lChild is not None and p.Rchild is not None:
+				s = p.RChild
+				while s.lChild is not None:
+					s = s.lChild
+				p.info = s.info
+				p.Rchild = self._deleteRecursively(p.Rchild, s.info)
+			else:
+				if p.lChild is not None:
+					ch = p.lChild
+				else:
+					ch = p.Rchild
+				p = ch
+		return p
+
 
 
 bst = BinarySearchTree()
@@ -229,9 +303,11 @@ while True:
 		x = int(input("Enter the value to be inserted: "))
 		bst.insertRecursively(x)
 	elif (choice == 6):
-		pass
+		x = int(input("Enter node to be deleted: "))
+		bst.deleteIteratively(x)
 	elif (choice == 7):
-		pass
+		x = int(input("Enter node to be deleted: "))
+		bst.deleteRecursively(x)
 	elif (choice == 8):
 		result = bst.minimumIterative()
 		print(result)
