@@ -119,6 +119,22 @@ class LinkedList(object):
 		return self.head
 #-----------------------------------------------------------
 
+# Removing duplicates from unsorted linked list----------
+
+	def removeDuplicatesUnsorted(self):
+		current = self.head
+		if current is None:
+			return None
+		while(current is not None):
+			runner = current
+			while (runner.next is not None):
+				if (runner.next.data == current.data):
+					runner.next = runner.next.next
+				else:
+					runner = runner.next
+			current = current.next
+
+
 # reversing the link list......
 
 	def reverseLinkedList(self):
@@ -173,16 +189,20 @@ while choice is not 6:
 
 list.push(2)
 list.push(4)
+list.push(3)
 list.push(4)
-list.push(6)
 print("created Linked List is ")
 list.printList()
-list.removeDuplicates()
-print("Linked list after deleting duplicates is")
+
+list.removeDuplicatesUnsorted()
+print('The list after removing duplicates from unsorted list is: ')
 list.printList()
-list.reverseLinkedList()
-print("List after reversing is ")
-list.printList()
+# list.removeDuplicates()
+# print("Linked list after deleting duplicates is")
+# list.printList()
+#list.reverseLinkedList()
+#print("List after reversing is ")
+#list.printList()
 #list.insertAfter(list.head.next,5)
 #list.insertAtEnd(90)
 #list.push(6)
@@ -191,11 +211,11 @@ list.printList()
 #list.insertAfter(list.head.next, 11)
 #list.insertAfter(list.head.next, 99)
 #list.deleteNode(11)
-print("The number of times integer is repeated is ",list.getCountOfInteger(6))
+# print("The number of times integer is repeated is ",list.getCountOfInteger(6))
 
-print("created linked list is: ")
-list.printList()
-print("Count of linked list is: ",list.getCount())
+# print("created linked list is: ")
+# list.printList()
+# print("Count of linked list is: ",list.getCount())
 
 #print("Total number of elements in the list is: "+list.count())
 
