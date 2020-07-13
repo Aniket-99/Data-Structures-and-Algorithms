@@ -149,7 +149,6 @@ class LinkedList(object):
 			current = next
 		self.head = prev
 
-
 ''' Removing duplicates from unsorted linked list
 	def removeDuplicatedFromUnsorted(self,list):
 		temp = self.head
@@ -164,6 +163,9 @@ class LinkedList(object):
 				current = current.next
 			temp = temp.next
 '''
+
+
+
 if __name__== '__main__':
 	list  = LinkedList() # creating object
 
@@ -191,12 +193,16 @@ list.push(2)
 list.push(4)
 list.push(3)
 list.push(4)
+list.push(5)
 print("created Linked List is ")
 list.printList()
 
-list.removeDuplicatesUnsorted()
-print('The list after removing duplicates from unsorted list is: ')
+list.deleteMiddle(3)
 list.printList()
+
+#list.removeDuplicatesUnsorted()
+#print('The list after removing duplicates from unsorted list is: ')
+#list.printList()
 # list.removeDuplicates()
 # print("Linked list after deleting duplicates is")
 # list.printList()

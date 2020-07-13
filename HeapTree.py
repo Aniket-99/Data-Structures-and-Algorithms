@@ -1,99 +1,110 @@
-class HeapEmptyError(Exception):
+class HeapTreeEmptyError(Exception):
 	pass
 
+'''This is an example of max heap'''
 class Heap:
+	def __init__(self,maxsize = 10):
+		self.array = [None] * maxsize;
+		self.index = 0;
+		self.array[0] = 9999
 
-	def __init__(self, maxsize = 10):
-		self.a = [None] * maxsize
-		self.n = 0
-		self.a[0] = 9999
-
+	'''This function is used to insert at the heap tree and it internally uses another function which is 
+	restore up for checking'''
 
 	def insert(self, value):
-		self.n += 1
-		self.a[self.n] = value
-		self.restoreUp(self.n)
+		self.index += 1
+		self.array[self.index] = value
+		self.restoreUp(self.index) # pass the index value to check
 
-	def restoreUp(self, i):
-		k = self.a[i]
-		indexParent = i // 2
+	def restoreUp(self, index):
+		value_at_index = self.array[index] # Get the value at the index and store it in variable
 
-		while self.a[indexParent] < k:
-			self.a[i] = self.a[indexParent]
-			i = indexParent
-			indexParent = i // 2
-		self.a[i] = k
+		iparent = index // 2 # Perform this to find the parent of the current value at index
 
-	def delete(self):
-		if self.n == 0:
-			raise HeapEmptyError("Heap tree is empty")
+		while self.array[iparent] < value_at_index: # Loop while the value at the parent index is less than the current index
+			self.array[index] = self.array[iparent] # Swap the value
+			index = iparent	# assign value to index
+			iparent = index // 2	# Find again the parent index and let the loop to continue
+		self.array[index] = value_at_index	# finally assign the value
 
-		maxValue = self.a[1]
-		self.a[1] = self.a[self.n]
-		self.n -= 1
+	'''This is for deleting value at root node'''
+
+	def delete_root(self):
+		if self.index == 0:
+			raise HeapTreeEmptyError("Tree is empty")
+
+		max_value = self.array[1]
+		self.array[1] = self.array[self.index]
+		self.index -= 1
 		self.restoreDown(1)
-		return maxValue
+		return max_value
 
+	def restoreDown(self,index):
+		k = self.array[index]
+		lchild = 2 * index
+		rchild = lchild + 1
 
-	def restoreDown(self, i):
-		k = self.a[i]
-		lChild = 2 * i
-		rChild = lChild + 1
-
-		while rChild <= self.n:
-			if k >= self.a[lChild] and k >= self.a[rChild]:
-				self.a[i] = k
+		while rchild <= self.index:
+			if self.array[lchild] <= k and self.array[rchild] <= k:
+				self.array[index] = k
 				return
+
 			else:
-				if self.a[lChild] > self.a[rChild]:
-					self.a[i] = self.a[lChild]
-					i = lChild
+				if self.array[lchild] > k:
+					self.array[index] = self.array[lchild]
+					index = lchild
 				else:
-					self.a[i] = self.a[rChild]
-					i = rChild
+					self.array[index] = self.array[rchild]
+					index = rchild
 
-			lChild = 2 * i
-			rChild = lChild + 1
+			lchild = 2 * index
+			rchild = rchild + 1
 
+		# If number of nodes is even
 
-		# if no of nodes is even
-
-		if lChild == self.n and k < self.a[lChild]:
-			self.a[i] = self.a[lChild]
-			i = lChild
-		self.a[i] = k
+		if lchild == self.index and k < self.array[lchild]:
+			self.array[index] = self.array[lchild]
+		self.array[index] = k
 
 	def display(self):
-		if self.n == 0:
-			raise HeapEmptyError("Heap tree is empty")
+		if self.index == 0:
+			print("Tree is empty")
 			return
-		print("Heap size is: ", self.n)
-		for i in range(1, self.n + 1):
-			print(self.a[i]," ", end = " ")
+		print("Heap size is: ", self.index)
+		for i in range(1, self.index + 1):
+			print(self.array[i], " ",end=" ")
 		print()
 
+if __name__ == '__main__':
+	h = Heap()
 
-heap = Heap()
+	while True:
+		print('1:Insert')
+		print('2:Delete root node')
+		print('3:Display')
+		print("4: Exit")
+		choice = int(input("Enter your choice: "))
 
-while True:
-	print("1. Insert")
-	print("2. Delete root element")
-	print("3. Display")
-	print("4. Exit")
+		if (choice == 1):
+			value = int(input("Enter the value: "))
+			h.insert(value)
 
-	choice = int(input("Enter your choice: "))
+		elif (choice == 2):
+			value = h.delete_root()
+			print("Maximum value is: ", value)
 
-	if choice == 1:
-		value = int(input("Enter the value to be inserted: "))
-		heap.insert(value)
-	elif choice == 2:
-		print("Maximum value is: ", heap.delete())
-	elif choice == 3:
-		heap.display()
-	elif choice == 4:
-		break
-	else:
-		print("Invalid choice")
-choice = int(input("Enter your choice: "))
+		elif (choice == 3):
+			h.display()
+			break
+		else:
+			print("Wrong choice")
+
+
+
+
+
+
+
+
 
 
