@@ -332,7 +332,7 @@ while True:
 	elif (choice == 16):
 		break;
 	else:
-		print("Invalid choice")
+		print("Invalid choice!Please Enter valid choice")
 
 choice = int(input("Enter your choice: "))
 
