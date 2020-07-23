@@ -209,7 +209,7 @@ class BinarySearchTree:
 
 
 		# case c : if node has 2 children
-
+		
 		if p.lChild is not None and p.Rchild is not None:
 			ps = p
 			s = p.Rchild
