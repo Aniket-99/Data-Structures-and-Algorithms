@@ -239,7 +239,6 @@ public class BinaryTreeStructure {
         System.out.println();
         int count = tree.countNodes(root);
         System.out.println("The total count of node is: " + count);
-        // Linekdin
 
         System.out.println("The Sum of nodes is: " + tree.sumOfNodes(root));
 
